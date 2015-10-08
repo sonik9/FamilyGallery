@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= blocks.title %></title>
+    <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap-image-gallery.min.css">
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<header>
+    <%- partial('../header') %>
+</header>
+
+<%- body  %>
+
+<footer>
+    <%- blocks.footer %>
+</footer>
+
+<script src="/js/bootstrap/bootstrap.min.js"></script>
+<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<script src="/js/bootstrap/bootstrap-image-gallery.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/demo.js"></script>
+
+<script>
+    $(document).ready(function(){
+        <%if(user){%>
+        $.signout();
+        <%}else{%>
+        $.signin();
+        $.signup();
+        <%}%>
+    });
+</script>
+</body>
+</html>

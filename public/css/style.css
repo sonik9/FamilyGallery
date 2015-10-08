@@ -9,20 +9,23 @@
 }
 .navbar-default .navbar-nav>li>a{
     color: #fff;
+    text-shadow: 2px 0px 3px rgba(255, 255, 255, 0.9);
+}
+.navbar-default .navbar-header{
+    text-shadow: 2px 0px 3px #337AB7;
+}
+.navbar-default .navbar-header>a:hover{
+    color: #337AB7;
 }
 html,
 body {
-
     height: 100%;
     background-color: #333;
-}
-body {
     color: #fff;
-    text-align: center;
-    text-shadow: 0 1px 3px rgba(0,0,0,.5);
+    /*text-shadow: 0 1px 3px rgba(0,0,0,.5);*/
     box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-}
 
+}
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
     padding-top:50px;
@@ -30,4 +33,99 @@ body {
     width: 100%;
     height: 100%; /* For at least Firefox */
     min-height: 100%;
+    text-align: center;
+}
+.sign{
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+.panel-body {
+    padding: 15px;
+}
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.panel-heading > .dropdown .dropdown-toggle {
+    color: inherit;
+}
+.center-block {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+.tb-panel {
+    background-color:transparent;
+}
+.tb-panel-heading {
+    opacity: 0.9;
+}
+.tb-panel-body {
+    opacity: 1;
+    background-color: rgba(39, 36, 36, 0.77);
+}
+.tb-panel-body-child {
+    opacity: 1;
+    background-color: #333333;
+}
+.tb-label.form-control { height:auto; border: 1px solid transparent; background-color: transparent; box-shadow: inherit; -webkit-box-shadow: inherit; }
+.inbox .btn-default {
+    background-color: #333;
+    border-color: #333;
+    color: #fff;
+}
+.inbox .btn-default:hover {
+    text-shadow: 2px 0px 3px rgba(255, 255, 255, 0.9);
+}
+
+.btn {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+}
+.btn i {
+    margin-right: 3px;
+}
+
+ .form-control {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.modal-dialog{
+    margin-top: 15%;
+}
+
+.fileinput-button {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 200px;
+    direction: ltr;
+    cursor: pointer;
 }

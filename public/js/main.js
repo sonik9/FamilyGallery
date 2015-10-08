@@ -23,6 +23,125 @@ function sizeH(bytes) {
     return (bytes / 1000).toFixed(2) + ' Kb.';
 }
 ;
+(function($){
+    $.signout = (function(){
+        $('#signOut').on('click',function(){
+            var form=$('form').prop('action','/signout').prop('method','post');
+            $.ajax({
+                url: "/signout",
+                method: "POST",
+                data: form.serialize(),
+                complete: function() {
+                    $(":submit", form).button("reset");
+                },
+                statusCode: {
+                    200: function() {
+                        form.html("?? ????? ? ????").addClass('alert-success');
+                        window.location.href = "/";
+                    },
+                    403: function(jqXHR) {
+                        var error = JSON.parse(jqXHR.responseText);
+                        $('.error', form).html(error.message);
+                    }
+                }
+            });
+            return false;
+        });
+    });
+
+})(jQuery);
+(function($){
+    $.signin = (function(){
+        $('#login-form').on('submit',function(){
+            var form=$(this);
+            $('.error', form).html('');
+            $(":submit", form).button("loading");
+
+            $.ajax({
+                url: "/signin",
+                //contentType: "application/json",
+                method: "POST",
+                //data: JSON.stringify(form),
+                data: form.serialize(),
+                complete: function() {
+                    $(":submit", form).button("reset");
+                },
+                statusCode: {
+                    200: function() {
+                        form.html("?? ????? ? ????").addClass('alert-success');
+                        window.location.href = "/";
+                    },
+                    403: function(jqXHR) {
+                        var error = JSON.parse(jqXHR.responseText);
+                        alert(error);
+                    }
+                }
+            });
+            return false;
+
+
+        });
+
+    });
+})(jQuery);
+
+(function($){
+    $.signup = (function(){
+        $('#register-form').on('submit',function(){
+            var form=$(this);
+            //$('.error', form).html('');
+            $(":submit", form).button("loading");
+
+            $.ajax({
+                url: "/signup",
+                //contentType: "application/json",
+                method: "POST",
+                //data: JSON.stringify(form),
+                data: form.serialize(),
+                complete: function() {
+                    $(":submit", form).button("reset");
+                },
+                success:function(message) {
+                    var mailservice = message.split('@');
+                    /*switch (mailservice[1]) {
+                        case 'gmail.com':
+                            mailservice=
+                    }*/
+                    $('#register-form').css('display','none');
+                    var p = document.createElement("p");
+                    $(p).append("Please confirm your registration! <p> Message has been sent to your email: <a href='http://"+mailservice[1]+"'>"+message+"</a></p>")
+                        .append("<a style='font-size:25px;' href='http://"+mailservice[1]+"'>"+mailservice[1]+"</a>");
+                    var div  = document.createElement("div");
+                    $(div).append(p).append("<br/><a href='/' class='btn btn-primary btn-lg btn-block' type='button'>Finish</a>");
+                    $('.panel-body').append(div);
+                },
+                error:function (xhr, status, errorThrown) {
+                    alert(JSON.parse(xhr.responseText) + ' ' + status + '. ' + errorThrown);
+                }
+                /*statusCode: {
+                    200: function(message) {
+                        $('#register-form').css('display','none');
+                        var p = document.createElement("p");
+                            $(p).append("Please confirm your registration! Message has been sent to your email:"+message);
+                        var div  = document.createElement("div");
+                            $(div).append(p);
+                       $('.panel-body').append(div);
+                    },
+                    403: function(jqXHR) {
+                        var error = JSON.parse(jqXHR.responseText);
+                        alert(error);
+                    }
+                }*/
+            });
+            return false;
+
+
+        });
+
+    });
+})(jQuery);
+
+
 (function ($) {
     $.validattion = (function (customFunction) {
         var app = {

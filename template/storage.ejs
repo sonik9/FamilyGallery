@@ -1,0 +1,83 @@
+<% layout('./layout/layout') %>
+<div class="container" style="padding-top: 60px;">
+
+    <div class="row">
+
+        <div class="panel panel-primary center-block tb-panel">
+            <div class="panel-heading tb-panel-heading">
+                <div style="text-align:center;">Storage upload</div>
+            </div>
+            <div class="panel-body tb-panel-body">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default center-block tb-panel">
+                        <div class="panel-heading tb-panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapseOne" aria-expanded="true"
+                                   aria-controls="collapseOne">
+                                    Storage upload files
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                             aria-labelledby="headingOne">
+                            <div class="panel-body tb-panel-body-child">
+                                <table id="filesUpload" class="table table-striped">
+                                    <tbody>
+                                    No files.
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default tb-panel">
+                        <div class="panel-heading tb-panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse"
+                                   data-parent="#accordion" href="#collapseTwo"
+                                   aria-expanded="false" aria-controls="collapseTwo">
+                                    Storage download files
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                             aria-labelledby="headingTwo">
+                            <div class="panel-body tb-panel-body-child" id="filelist"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer tb-panel-body" style="border-top:1px solid #333333;">
+                <div class="pull-right">
+                    <button  id="deleteall"
+                            data-toggle="tooltip" type="submit"
+                            class="btn btn-primary btn-danger">
+                        <span class="fa fa-trash-o"></span>
+                        Delete all
+                    </button>
+                </div>
+
+                <div class=" btn-group">
+                                             <span class="btn btn-success fileinput-button">
+                                                <span>Add files</span>
+                                                  <input path="file" type="file" name="files[]" multiple="true"
+                                                         id="fileUpload"/>
+                                             </span>
+                    <button  id="clearall"
+                            data-toggle="tooltip" type="submit"
+                            class="btn btn-primary btn-warning" disabled="disabled">
+                        <span class="fa fa-ban"></span>
+                        Clear all
+                    </button>
+                    <button  data-toggle="tooltip"
+                            id="uploadall" class="btn btn-primary btn-default"
+                            disabled="disabled">
+                        <span class="fa fa-upload"></span>
+                        Upload all
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
