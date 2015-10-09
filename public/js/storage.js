@@ -6,7 +6,7 @@
 NProgress.configure({easing: 'ease', speed: 500});
 //        $("#fileUpload").on("change", handleFileSelect);
 
-var homePath = $("#homePath").val(),
+var //homePath = $("#homePath").val(),
     storedFiles = [],
     deletedFiles = [],
     uploadFiles = [],
@@ -21,17 +21,18 @@ var homePath = $("#homePath").val(),
 
             for (i = 0; i < uploadFiles.length; i++) {
                 if (uploadFiles[i].name === name) {
-                    form.append('files', uploadFiles[i]);
+                    form.append('filesUp', uploadFiles[i]);
                     break;
                 }
             }
+
             jQuery.ajax({
                     data: form,
                     type: "POST",
-                    enctype: 'multipart/form-data',
-                    processData: false,
-                    contentType: false,
-                    url: homePath+"/storage/upload",
+                    //enctype: 'multipart/form-data',
+//                    processData: false,
+                    //                  contentType: false,
+                    url: "/storage/upload",
                     xhr: function () {
                         var xhr = new window.XMLHttpRequest();
                         //Upload progress
@@ -60,7 +61,7 @@ var homePath = $("#homePath").val(),
                         if (uploadFiles.length === 0) {
                             $("#filesUpload").find('tbody').append("No files");
                         }
-                        updateFrame();
+                        // updateFrame();
                         NProgress.done();
                     },
                     error: function (xhr, status, errorThrown) {
@@ -99,7 +100,7 @@ function clearAll() {
 }
 
 
-updateFrame();
+//updateFrame();
 function showimagepreview(input) {
     if (input.files && input.files[0]) {
         if (uploadFiles.length === 0) {
@@ -136,7 +137,7 @@ function showimagepreview(input) {
     }
 }
 function updateFrame() {
-    $("#filelist").load(homePath + "/storage/download",function() {
+    $("#filelist").load(homePath + "/storage/download", function () {
         if ($("#filelist").find('div').length === 0) { //is(":empty")){
             $('#deleteall').prop("disabled", true);
         } else
@@ -155,51 +156,61 @@ $("#clearall").click(function () {
 });
 
 $("#uploadall").click(function () {
-    var form = new FormData();
+    var $form = new FormData();
     for (var i = 0, len = uploadFiles.length; i < len; i++) {
-        form.append('files', uploadFiles[i]);
+        $form.append('files', uploadFiles[i]);
     }
-    jQuery.ajax({
-            data: form,
-            type: "POST",
-            enctype: 'multipart/form-data',
-            processData: false,
-            contentType: false,
-            url: homePath+"/storage/upload",
-            xhr: function () {
-                var xhr = new window.XMLHttpRequest();
-                //Upload progress
-                xhr.upload.addEventListener("progress", function (evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = evt.loaded / evt.total;
-                        NProgress.start();
-                        console.log(percentComplete);
-                    }
-                }, false);
-                //Download progress
-                xhr.addEventListener("progress", function (evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = evt.loaded / evt.total;
-                        //Do something with download progress
-                        NProgress.set(percentComplete);
-                        console.log(percentComplete);
-                    }
-                }, false);
-                return xhr;
-            },
-            success: function (data) {
-                clearAll();
-                updateFrame();
-                NProgress.done();
-            },
-            error: function (xhr, status, errorThrown) {
-                alert(xhr + ' ' + status + '. ' + errorThrown);
-                NProgress.done();
-            }
-
-
+    $.ajax({
+        url: '/storage/upload',
+        data: $form,
+        processData: false,
+        type: 'POST',
+        success: function ( data ) {
+            alert( data );
         }
-    );
+    });
+
+    /*jQuery.ajax({
+     data: form,
+     type: "POST",
+     enctype: 'multipart/form-data',
+     processData: true,
+     contentType: false,
+     url: "/storage/upload",
+     xhr: function () {
+     var xhr = new window.XMLHttpRequest();
+     //Upload progress
+     xhr.upload.addEventListener("progress", function (evt) {
+     if (evt.lengthComputable) {
+     var percentComplete = evt.loaded / evt.total;
+     NProgress.start();
+     console.log(percentComplete);
+     }
+     }, false);
+     //Download progress
+     xhr.addEventListener("progress", function (evt) {
+     if (evt.lengthComputable) {
+     var percentComplete = evt.loaded / evt.total;
+     //Do something with download progress
+     NProgress.set(percentComplete);
+     console.log(percentComplete);
+     }
+     }, false);
+     return xhr;
+     },
+     success: function (data) {
+     clearAll();
+     //updateFrame();
+     NProgress.done();
+     },
+     error: function (xhr, status, errorThrown) {
+     alert(xhr.responseText + ' ' + status + '. ' + errorThrown);
+     NProgress.done();
+     }
+
+
+     }
+     );*/
 });
 
 /*function filespaste(file) {
@@ -334,7 +345,7 @@ function deleteFiles(files) {
                 },
                 success: function (data) {
                     updateFrame();
-                    alert("Files: "+data+" was deleted!");
+                    alert("Files: " + data + " was deleted!");
                     NProgress.done();
                 },
                 error: function (xhr, status, errorThrown) {

@@ -8,6 +8,7 @@ module.exports = function(req,res,next){
             res.json(err.message);
         }else{
             res.render("error", {
+                title:"Family Gellary - Error!",
                 message: err.message,
                 error: err,
                 status:err.status

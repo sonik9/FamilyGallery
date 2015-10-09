@@ -5,6 +5,7 @@ var log = require('../lib/log')(module),
     User = require('../model/user').User,
     ObjectId = require('mongodb').ObjectID,
     bodyParser = require('body-parser');
+var checkAuth = require('middleware/checkAuth');
 //module.exports = function (app) {
 /* GET home page. */
 
@@ -13,7 +14,8 @@ router.post('/signin', require('./sign').signin);
 router.post('/signout', require('./sign').signout);
 router.post('/signup', require('./sign').signup);
 
-router.get('/storage',require('./storage').get);
+router.get('/storage',checkAuth,require('./storage').get);
+router.post('/storage/upload',checkAuth,require('./storage').post);
 
 /*
 
