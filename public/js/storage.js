@@ -156,15 +156,17 @@ $("#clearall").click(function () {
 });
 
 $("#uploadall").click(function () {
-    var $form = new FormData();
+    var formData = new FormData();
     for (var i = 0, len = uploadFiles.length; i < len; i++) {
-        $form.append('files', uploadFiles[i]);
+        formData.append('files', uploadFiles[i]);
     }
     $.ajax({
         url: '/storage/upload',
-        data: $form,
-        processData: false,
+        data: formData,
         type: 'POST',
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
         success: function ( data ) {
             alert( data );
         }

@@ -1,6 +1,6 @@
 {
   "mongoose": {
-    "uri": "mongodb://localhost/FG",
+    "uri": "mongodb://127.0.0.1/FG",
     "options": {
       "server": {
         "socketOptions": {

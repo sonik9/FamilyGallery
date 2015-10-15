@@ -8,8 +8,10 @@ exports.get = function(req,res,next){
 exports.post = function(req,res,next){
 
     var files = req.files;
-    files.forEach(file,i, function (err) {
-        console.log(i+":"+file);
-    });
-
+    if(files) {
+        files.forEach(file, i, function (err) {
+            console.log(i + ":" + file);
+        });
+    }else
+    return next();
 };
